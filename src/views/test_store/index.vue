@@ -11,12 +11,14 @@
   </n-space>
   <div>{{ mainStore.name }}<br />长度:{{ mainStore.nameLength }}</div>
   <div>{{ nodeEnv }}</div>
+  <n-input v-model:value="aaa" type="text" placeholder="aaa" clearable />
 </template>
 
 <script setup lang="ts">
 import { useMainStore } from '@/store/index'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
+const aaa = ref('')
 const nodeEnv = import.meta.env.VITE_APP_WEB_URL
 
 const mainStore = useMainStore()

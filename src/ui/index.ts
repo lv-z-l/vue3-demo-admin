@@ -17,7 +17,9 @@ import {
   NDivider,
   NIcon,
   NMenu,
-  NResult
+  NResult,
+  NAnchor,
+  NAnchorLink
 } from 'naive-ui'
 
 const naive = create({
@@ -37,7 +39,9 @@ const naive = create({
     NDivider,
     NIcon,
     NMenu,
-    NResult
+    NResult,
+    NAnchor,
+    NAnchorLink
   ]
 })
 

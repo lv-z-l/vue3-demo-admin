@@ -5,21 +5,19 @@
         <n-avatar :size="48" :src="logo" round />
         <span v-show="!collapsed">{{ appConfig.appName }}</span>
       </div>
-      <n-menu :options="menusOptions" :root-indent="0" accordion> </n-menu>
+      <n-menu :options="menusOptions" :root-indent="0" accordion></n-menu>
       <n-divider />
       <div class="avatar flex-ct-ct">
         <n-icon size="24">
           <LogOutOutline></LogOutOutline>
         </n-icon>
-        <span v-show="!collapsed"> 注销 </span>
+        <span v-show="!collapsed">注销</span>
       </div>
     </n-layout-sider>
     <n-layout>
       <n-layout-header bordered inverted>
         <div>
-          <span>
-            {{ route.name ? route.name : 'DefaultRouteName' }}
-          </span>
+          <span>{{ route.name ? route.name : 'DefaultRouteName' }}</span>
           <div>
             <n-icon size="24">
               <SearchOutline></SearchOutline>
@@ -32,11 +30,19 @@
         </div>
       </n-layout-header>
       <n-layout-content content-style="padding: 16px" :native-scrollbar="false">
-        <RouterView></RouterView>
+        <RouterView v-slot="{ Component }">
+          <KeepAlive :max="5"> <component :is="Component" /> </KeepAlive
+        ></RouterView>
       </n-layout-content>
     </n-layout>
   </n-layout>
-  <n-layout v-else class="main-page full-screen" has-sider sider-placement="right"> </n-layout>
+  <n-layout v-else class="main-page full-screen" has-sider sider-placement="right"></n-layout>
+  <!-- <div class="open-menu-anchor">
+    <RouterLink to="/test0">1111</RouterLink>
+    <RouterLink to="/test0">1111</RouterLink>
+    <RouterLink to="/test0">1111</RouterLink>
+    <RouterLink to="/test0">1111</RouterLink>
+  </div> -->
 </template>
 
 <script setup lang="tsx">
@@ -44,7 +50,7 @@ import { ref, resolveComponent } from 'vue'
 import logo from '@/assets/images/logo.png'
 import avatar from '@/assets/images/avatar.jpg'
 import appConfig from '@/config/index'
-import { useRoute, RouterLink, RouterView } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import menuConfigOptions from '@/config/menu/index'
 import menuConfigOption from '@/config/menu/types'
 import { arrayToTree, isRealObject } from '@/utils/index'
@@ -183,4 +189,25 @@ function renderMenu(menu: any) {
     }
   }
 }
+// .open-menu-anchor {
+//   position: fixed;
+//   top: $main-header-height;
+//   right: 0;
+//   width: 160px;
+//   max-height: 320px;
+//   min-height: 160px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   align-items: flex-start;
+//   background-color: rgb(24, 24, 28);
+//   > a {
+//     text-decoration: none;
+//     font-size: 16px;
+//     width: 100%;
+//     line-height: 36px;
+//     padding: 0 $content-padding;
+//     color: rgba(255, 255, 255, 0.82);
+//   }
+// }
 </style>
