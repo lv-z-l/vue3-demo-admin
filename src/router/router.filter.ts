@@ -1,9 +1,13 @@
 import { Router } from 'vue-router'
 import { useMainStore } from '@/store/index'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+nprogress.configure({ showSpinner: true })
 
 const { log } = console
 const initRouterFilter = (router: Router) => {
   router.beforeEach((to, from, next) => {
+    nprogress.start()
     const mainStore = useMainStore()
     log('全局前置守卫被调用', 'to:', to.path, '   from:', from.path)
     /** 1. 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed (确认的)
@@ -41,6 +45,7 @@ const initRouterFilter = (router: Router) => {
   })
 
   router.afterEach(() => {
+    nprogress.done()
     log('全局后置钩子')
   })
 }
